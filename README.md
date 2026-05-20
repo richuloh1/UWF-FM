@@ -43,7 +43,7 @@ After downloading the checkpoint, place it in the checkpoint directory of the RE
 
 ```bash
 checkpoints/
-└── UWF-FM.pth
+└── UWF-FM_weight_final.pth
 ```
 
 ---
@@ -66,7 +66,7 @@ After that, download the UWF-FM pretrained weight from the link above and place 
 
 ```bash
 checkpoints/
-└── UWF-FM.pth
+└── UWF-FM_weight_final.pth
 ```
 
 You can then fine-tune the model using the RETFound_MAE fine-tuning pipeline by replacing the RETFound pretrained checkpoint path with the UWF-FM checkpoint path.
@@ -76,7 +76,7 @@ Example:
 ```bash
 python main_finetune.py \
     --model vit_large_patch16 \
-    --finetune checkpoints/UWF-FM.pth \
+    --finetune checkpoints/UWF-FM_weight_final.pth \
     --data_path data/ \
     --nb_classes 3 \
     --batch_size 32 \
@@ -136,7 +136,7 @@ Please also cite RETFound if you use the RETFound_MAE codebase:
 ```bibtex
 @article{zhou2023foundation,
   title={A foundation model for generalizable disease detection from retinal images},
-  author={Zhou, Yukun and Chia, Mark A and Wagner, Siegfried K and Ayhan, Murat S and Williamson, Dominic J and Struyven, Robbert R and Liu, Timing and Xu, Moucheng and Lozano, Mateo G and Woodward-Court, Peter and others},
+  author={Zhou, Yukun and Chia, Mark A and Wagner, Siegfried K and Ayhan, Murat S and Williamson, Dominic J and Liu, Timing and Xu, Moucheng and Lozano, Mateo G and Woodward-Court, Peter and others},
   journal={Nature},
   volume={622},
   number={7981},
