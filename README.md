@@ -33,13 +33,13 @@ The implementation follows the MAE-based retinal foundation model framework used
 
 ## Pretrained Weights
 
-The pretrained UWF-FM weights are available at the following link:
+This repository provides the pretrained UWF-FM weight.
 
 | Model | Description | Download |
 |---|---|---|
 | UWF-FM | MAE-based foundation model pretrained on ultra-widefield fundus images | [Google Drive](https://drive.google.com/file/d/1eRxze51JSE7WV99gFD-Tvi_gMTEDCqWj/view?usp=drive_link) |
 
-After downloading the checkpoint, place it in the desired checkpoint directory, for example:
+After downloading the checkpoint, place it in the checkpoint directory of the RETFound_MAE codebase, for example:
 
 ```bash
 checkpoints/
@@ -48,51 +48,30 @@ checkpoints/
 
 ---
 
-## Installation
+## Usage
 
-This repository follows the RETFound/MAE-style implementation.
+This repository provides the pretrained UWF-FM weight only.  
+For fine-tuning and evaluation, please use the RETFound_MAE codebase and replace the pretrained checkpoint with the UWF-FM checkpoint.
 
-```bash
-git clone https://github.com/richuloh1/UWF-FM.git
-cd UWF-FM
-
-conda create -n uwffm python=3.7.16 -y
-conda activate uwffm
-
-pip install -r requirement.txt
-```
-
-If you use the original RETFound codebase, you can use the same environment and replace the pretrained checkpoint with the UWF-FM weight.
-
----
-
-## Dataset Structure for Fine-tuning
-
-Prepare your dataset in the following format:
+First, clone the RETFound_MAE codebase:
 
 ```bash
-data/
-├── train/
-│   ├── class_1/
-│   ├── class_2/
-│   └── class_3/
-├── val/
-│   ├── class_1/
-│   ├── class_2/
-│   └── class_3/
-└── test/
-    ├── class_1/
-    ├── class_2/
-    └── class_3/
+git clone https://github.com/rmaphoh/RETFound_MAE.git
+cd RETFound_MAE
 ```
 
-Each class folder should contain UWF fundus images belonging to that category.
+Then set up the environment following the instructions in the RETFound_MAE repository.
 
----
+After that, download the UWF-FM pretrained weight from the link above and place it in the checkpoint directory:
 
-## Fine-tuning
+```bash
+checkpoints/
+└── UWF-FM.pth
+```
 
-Example command:
+You can then fine-tune the model using the RETFound_MAE fine-tuning pipeline by replacing the RETFound pretrained checkpoint path with the UWF-FM checkpoint path.
+
+Example:
 
 ```bash
 python main_finetune.py \
@@ -114,21 +93,28 @@ Please modify `--nb_classes`, `--data_path`, and other arguments according to yo
 
 ---
 
-## Inference
+## Dataset Structure for Fine-tuning
 
-After fine-tuning, the trained checkpoint can be used for inference on held-out UWF images.
-
-Example:
+Prepare your dataset in the format required by RETFound_MAE.  
+A typical folder structure is as follows:
 
 ```bash
-python main_finetune.py \
-    --eval \
-    --resume output_dir/checkpoint-best.pth \
-    --data_path data/ \
-    --nb_classes 3 \
-    --batch_size 32 \
-    --input_size 224
+data/
+├── train/
+│   ├── class_1/
+│   ├── class_2/
+│   └── class_3/
+├── val/
+│   ├── class_1/
+│   ├── class_2/
+│   └── class_3/
+└── test/
+    ├── class_1/
+    ├── class_2/
+    └── class_3/
 ```
+
+Each class folder should contain UWF fundus images belonging to that category.
 
 ---
 
@@ -145,7 +131,7 @@ If you use UWF-FM in your research, please cite our article:
 }
 ```
 
-Please also cite RETFound if you use the RETFound/MAE codebase:
+Please also cite RETFound if you use the RETFound_MAE codebase:
 
 ```bibtex
 @article{zhou2023foundation,
@@ -164,10 +150,10 @@ Please also cite RETFound if you use the RETFound/MAE codebase:
 
 ## Acknowledgements
 
-This repository is based on the RETFound/MAE framework.  
+This model was developed based on the RETFound/MAE framework.  
 We thank the authors of RETFound for releasing their code and pretrained retinal foundation models.
 
-- RETFound: https://github.com/rmaphoh/RETFound
+- RETFound_MAE: https://github.com/rmaphoh/RETFound_MAE
 
 ---
 
